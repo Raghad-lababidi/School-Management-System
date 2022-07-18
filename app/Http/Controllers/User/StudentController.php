@@ -8,12 +8,13 @@ use App\Models\Student;
 class StudentController extends Controller 
 {
 
-  public function groupstudents($id)
+  public function groupstudents($class_id,$group_id)
   {
-     $students = Student::whereHas('class_group', function($q)use($id){
-      $q->where('group_id',$id);
+     $students = Student::whereHas('class_group', function($q)use($class_id,$group_id){
+      $q->where('school_class_id',$class_id)
+        ->where('group_id',$group_id);
     })->join('users','students.user_id','=','users.id')
-    ->select('students.id','first_name','last_name','father_name','mother_name','students.phone')
+    ->select('students.id','students.user_id','first_name','last_name','father_name','mother_name','students.phone')
     ->get();
     if (isset($students)) {
     $response['data'] =$students->values();

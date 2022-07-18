@@ -1,6 +1,6 @@
 <?php
 
-namespace SchoolClass;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,17 +22,17 @@ class SchoolClass extends Model
     ##############################Relationships##############################
     public function class_group()
     {
-        return $this->hasMany('Class_Group');
+        return $this->hasMany(ClassGroup::class);
     }
 
     public function class_subject()
     {
-        return $this->hasMany('Class_subject');
+        return $this->hasMany(ClassSubject::class);
     }
 
     public function class_events()
     {
-        return $this->hasMany('Class_event');
+        return $this->hasMany(ClassEvent::class);
     }
 
 }

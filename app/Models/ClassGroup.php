@@ -1,6 +1,6 @@
 <?php
 
-namespace ClassGroup;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +23,11 @@ class ClassGroup extends Model
     public function schedule()
     {
         return $this->hasMany('Schedule');
+    }
+
+    public function group()
+    {
+        return $this->belongsTo('Group');
     }
 
 }

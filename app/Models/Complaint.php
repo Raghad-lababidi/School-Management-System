@@ -1,6 +1,6 @@
 <?php
 
-namespace Complaint;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -3,84 +3,30 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class StudentController extends Controller 
 {
 
-  /**
-   * Display a listing of the resource.
-   *
-   * @return Response
-   */
-  public function index()
+  public function groupstudents($id)
   {
-    
+     $students = Student::whereHas('class_group', function($q)use($id){
+      $q->where('group_id',$id);
+    })->join('users','students.user_id','=','users.id')
+    ->select('students.id','first_name','last_name','father_name','mother_name','students.phone')
+    ->get();
+    if (isset($students)) {
+    $response['data'] =$students->values();
+    $response['message'] = "success";
+    $response['status_code'] = 200;
+    return response()->json($response,200) ;
+    }
+    $response['data'] =$students->values();
+    $response['message'] = "error";
+    $response['status_code'] = 404;
+    return response()->json($response,404) ;
   }
-
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return Response
-   */
-  public function create()
-  {
-    
-  }
-
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @return Response
-   */
-  public function store(Request $request)
-  {
-    
-  }
-
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function show($id)
-  {
-    
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function edit($id)
-  {
-    
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function update($id)
-  {
-    
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function destroy($id)
-  {
-    
-  }
-  
+ 
 }
 
 ?>

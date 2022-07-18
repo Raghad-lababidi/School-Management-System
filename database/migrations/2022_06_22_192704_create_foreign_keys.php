@@ -39,7 +39,7 @@ class CreateForeignKeys extends Migration {
 						->onUpdate('cascade');
 		});
 		Schema::table('class_group', function(Blueprint $table) {
-			$table->foreign('class_id')->references('id')->on('classes')
+			$table->foreign('school_class_id')->references('id')->on('classes')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});

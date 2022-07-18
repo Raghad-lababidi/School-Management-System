@@ -1,6 +1,6 @@
 <?php
 
-namespace Group;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,7 +22,7 @@ class Group extends Model
     ##############################Relationships##############################
     public function class_group()
     {
-        return $this->hasMany('Class_Group');
+        return $this->hasMany(ClassGroup::class);
     }
 
 }

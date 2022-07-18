@@ -1,9 +1,9 @@
 <?php
 
-namespace Student;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\Student as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
@@ -52,12 +52,17 @@ class Student extends Authenticatable  implements JWTSubject
 
     public function marks()
     {
-        return $this->hasMany('Mark');
+        return $this->hasMany(Mark::class);
     }
 
     public function attendances()
     {
-        return $this->hasMany('Attendance_check');
+        return $this->hasMany(AttendanceCheck::class);
+    }
+
+    public function class_group()
+    {
+        return $this->belongsTo(ClassGroup::class);
     }
 
 }

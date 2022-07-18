@@ -1,6 +1,6 @@
 <?php
 
-namespace AttendanceCheck;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,7 +22,7 @@ class AttendanceCheck extends Model
     ##############################Relationships##############################
     public function justification()
     {
-        return $this->hasOne('Justification');
+        return $this->hasOne(Justification::class);
     }
 
 }

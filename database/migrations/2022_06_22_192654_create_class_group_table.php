@@ -9,7 +9,7 @@ class CreateClassGroupTable extends Migration {
 	{
 		Schema::create('class_group', function(Blueprint $table) {
 			$table->bigIncrements('id');
-			$table->unsignedBigInteger('class_id');
+			$table->unsignedBigInteger('school_class_id');
 			$table->unsignedBigInteger('group_id');
 			$table->unsignedBigInteger('administrator_id');
 			$table->timestamps();

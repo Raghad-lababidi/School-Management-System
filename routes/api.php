@@ -30,7 +30,7 @@ Route::group(['prefix' => 'student'], function () {
 
     Route::post('logout', [App\Http\Controllers\Auth\Student\AuthController::class, 'logout'])->middleware(['auth.guard:student-api']);
 
-    Route::post('event/all', [App\Http\Controllers\Auth\User\AttendanceCheckController::class, 'all'])->middleware(['auth.guard:student-api']);
+    Route::post('event/all', [App\Http\Controllers\User\AttendanceCheckController::class, 'all'])->middleware(['auth.guard:student-api']);
 
 
 });

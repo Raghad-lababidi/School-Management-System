@@ -41,6 +41,21 @@ class ClassController extends Controller
     return response()->json($response,404) ;
   }
 
+  public function add_class(Request $request)
+  {
+     $class =new SchoolClass;
+   
+     $class->name= $request->name;
+
+     $class->save();
+
+    $response['data'] =$class;
+    $response['message'] = "stor success";
+    $response['status_code'] = 200;
+    return response()->json($response,200) ;
+ 
+  }
+
 }
 
 ?>

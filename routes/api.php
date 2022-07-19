@@ -48,6 +48,8 @@ use Illuminate\Support\Facades\Route;
     Route::get( '/compaints/administrator_receivedcomplaints/{user_id}',[App\Http\Controllers\User\ComplaintReceiverController::class, 'administrator_receivedcomplaints']);
     Route::post( '/compaints/add_administrator_complaint',[App\Http\Controllers\User\ComplaintController::class, 'add_administrator_complaint']);
     Route::post( '/compaints/add_student_complaint',[App\Http\Controllers\User\ComplaintController::class, 'add_student_complaint']);
+    Route::post( '/student/add_student',[App\Http\Controllers\User\StudentController::class, 'add_student']);
+    Route::post( '/class/add_class',[App\Http\Controllers\User\ClassController::class, 'add_class']);
     
 
 

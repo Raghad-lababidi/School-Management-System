@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateClassEventTable extends Migration {
 
@@ -9,7 +10,7 @@ class CreateClassEventTable extends Migration {
 	{
 		Schema::create('class_event', function(Blueprint $table) {
 			$table->bigIncrements('id');
-			$table->unsignedBigInteger('class_id');
+			$table->unsignedBigInteger('school_class_id');
 			$table->unsignedBigInteger('event_id');
 			$table->timestamps();
 		});

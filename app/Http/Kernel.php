@@ -66,6 +66,8 @@ class Kernel extends HttpKernel
 
         'checkPassword' => \App\Http\Middleware\CheckPassword::class,
         'changeLanguage' => \App\Http\Middleware\ChangeLanguage::class,
+
+        //'auth.jwt' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
         
         'auth.guard'  =>  \App\Http\Middleware\AssignGuard::class
     ];

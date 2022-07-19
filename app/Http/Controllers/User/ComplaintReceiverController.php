@@ -31,7 +31,7 @@ class ComplaintReceiverController extends Controller
      $compaints = ComplaintReceiver::where('receiver_id',$id)
     ->join('complaints','complaints_receivers.complaint_id','=','complaints.id')
     ->join('users','complaints.sender_id','=','users.id')
-    ->select('complaints.*','complaints_receivers.receiver_id','first_name','last_name','user_name')
+    ->select('complaints.*','complaints_receivers.receiver_id','first_name','last_name')
      ->get();
     if (isset($compaints)) {
     $response['data'] =$compaints->values();
@@ -45,7 +45,7 @@ class ComplaintReceiverController extends Controller
     return response()->json($response,404) ;
   }
 
-  
+
 
 }
 

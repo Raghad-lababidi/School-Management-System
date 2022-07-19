@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\Administrator as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Administrator extends Authenticatable  implements JWTSubject
@@ -14,11 +14,11 @@ class Administrator extends Authenticatable  implements JWTSubject
     public $timestamps = true;
 
     protected $fillable = [
-        'age', 'certification', 'user_id'
+        'user_name', 'age', 'certification', 'user_id'
     ];
 
     protected $hidden = [
-        'created_at', 'updated_at'
+       'password', 'created_at', 'updated_at'
     ];
 
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateClassSubjectTable extends Migration {
 
@@ -9,7 +10,7 @@ class CreateClassSubjectTable extends Migration {
 	{
 		Schema::create('class_subject', function(Blueprint $table) {
 			$table->bigIncrements('id');
-			$table->unsignedBigInteger('class_id');
+			$table->unsignedBigInteger('school_class_id');
 			$table->unsignedBigInteger('subject_id');
 			$table->timestamps();
 		});

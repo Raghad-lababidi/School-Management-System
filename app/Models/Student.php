@@ -15,11 +15,11 @@ class Student extends Authenticatable  implements JWTSubject
     public $timestamps = true;
 
     protected $fillable = [
-        'father_name', 'mother_name', 'phone', 'user_id', 'class_group_id'
+        'father_name', 'mother_name', 'phone', 'user_name', 'user_id', 'class_group_id'
     ];
 
     protected $hidden = [
-        'created_at', 'updated_at'
+        'password', 'created_at', 'updated_at'
     ];
 
     /**

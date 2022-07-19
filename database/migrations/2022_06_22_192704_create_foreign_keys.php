@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
 
 class CreateForeignKeys extends Migration {
 
@@ -59,7 +59,7 @@ class CreateForeignKeys extends Migration {
 						->onUpdate('cascade');
 		});
 		Schema::table('class_subject', function(Blueprint $table) {
-			$table->foreign('class_id')->references('id')->on('classes')
+			$table->foreign('school_class_id')->references('id')->on('classes')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
@@ -94,7 +94,7 @@ class CreateForeignKeys extends Migration {
 						->onUpdate('cascade');
 		});
 		Schema::table('class_event', function(Blueprint $table) {
-			$table->foreign('class_id')->references('id')->on('classes')
+			$table->foreign('school_class_id')->references('id')->on('classes')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
@@ -126,7 +126,7 @@ class CreateForeignKeys extends Migration {
 			$table->dropForeign('complaints_receivers_receiver_id_foreign');
 		});
 		Schema::table('class_group', function(Blueprint $table) {
-			$table->dropForeign('class_group_class_id_foreign');
+			$table->dropForeign('class_group_school_class_id_foreign');
 		});
 		Schema::table('class_group', function(Blueprint $table) {
 			$table->dropForeign('class_group_group_id_foreign');
@@ -138,7 +138,7 @@ class CreateForeignKeys extends Migration {
 			$table->dropForeign('schedules_class_group_id_foreign');
 		});
 		Schema::table('class_subject', function(Blueprint $table) {
-			$table->dropForeign('class_subject_class_id_foreign');
+			$table->dropForeign('class_subject_school_class_id_foreign');
 		});
 		Schema::table('class_subject', function(Blueprint $table) {
 			$table->dropForeign('class_subject_subject_id_foreign');
@@ -159,7 +159,7 @@ class CreateForeignKeys extends Migration {
 			$table->dropForeign('justifications_attendance_check_id_foreign');
 		});
 		Schema::table('class_event', function(Blueprint $table) {
-			$table->dropForeign('class_event_class_id_foreign');
+			$table->dropForeign('class_event_school_class_id_foreign');
 		});
 		Schema::table('class_event', function(Blueprint $table) {
 			$table->dropForeign('class_event_event_id_foreign');

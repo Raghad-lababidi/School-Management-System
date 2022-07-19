@@ -27,5 +27,3 @@ class GroupController extends Controller
 
  
 }
-
-?>

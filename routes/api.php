@@ -15,11 +15,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-
-    Route::post('nagham', [App\Http\Controllers\Auth\Administrator\AuthController::class, 'nagham']);
-
-
  
     Route::group(['prefix' => 'administrator'],function (){
 
@@ -29,12 +24,15 @@ use Illuminate\Support\Facades\Route;
 
     });
 
-     Route::group(['prefix' => 'student'],function (){
+    Route::group(['prefix' => 'student'], function () {
 
         Route::post('login', [App\Http\Controllers\Auth\Student\AuthController::class, 'login']);
-        
-        Route::post('logout',[App\Http\Controllers\Auth\Student\AuthController::class, 'logout']) -> middleware(['auth.guard:student-api']);
-
+    
+        Route::post('logout', [App\Http\Controllers\Auth\Student\AuthController::class, 'logout'])->middleware(['auth.guard:student-api']);
+    
+        Route::post('event/all', [App\Http\Controllers\Auth\User\AttendanceCheckController::class, 'all'])->middleware(['auth.guard:student-api']);
+    
+    
     });
 
 
@@ -50,6 +48,8 @@ use Illuminate\Support\Facades\Route;
     Route::get( '/compaints/administrator_receivedcomplaints/{user_id}',[App\Http\Controllers\User\ComplaintReceiverController::class, 'administrator_receivedcomplaints']);
     Route::post( '/compaints/add_administrator_complaint',[App\Http\Controllers\User\ComplaintController::class, 'add_administrator_complaint']);
     Route::post( '/compaints/add_student_complaint',[App\Http\Controllers\User\ComplaintController::class, 'add_student_complaint']);
+    
+
 
 
 

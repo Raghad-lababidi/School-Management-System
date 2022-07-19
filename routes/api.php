@@ -16,18 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::post('nagham', [App\Http\Controllers\Auth\Administrator\AuthController::class, 'nagham']);
-
-
-
 Route::group(['prefix' => 'administrator'], function () {
 
     Route::post('login', [App\Http\Controllers\Auth\Administrator\AuthController::class, 'login']);
 
     Route::post('logout', [App\Http\Controllers\Auth\Administrator\AuthController::class, 'logout'])->middleware(['auth.guard:administrator-api']);
-
-    Route::post('test', [App\Http\Controllers\Auth\Administrator\AuthController::class, 'test'])->middleware(['auth.guard:administrator-api']);
 
 });
 
@@ -37,7 +30,8 @@ Route::group(['prefix' => 'student'], function () {
 
     Route::post('logout', [App\Http\Controllers\Auth\Student\AuthController::class, 'logout'])->middleware(['auth.guard:student-api']);
 
-    Route::post('test', [App\Http\Controllers\Auth\Administrator\AuthController::class, 'test'])->middleware(['auth.guard:student-api']);
+    Route::post('event/all', [App\Http\Controllers\Auth\User\AttendanceCheckController::class, 'all'])->middleware(['auth.guard:student-api']);
+
 
 });
 

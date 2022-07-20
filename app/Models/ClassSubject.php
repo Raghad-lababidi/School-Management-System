@@ -12,7 +12,7 @@ class ClassSubject extends Model
     public $timestamps = true;
 
     protected $fillable = [
-       'class_room_id', 'subject_id'
+       'school_class_id', 'subject_id'
     ];
 
     protected $hidden = [

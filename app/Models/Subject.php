@@ -33,7 +33,7 @@ class Subject extends Model
 
     public function schoolClasses()
     {
-        return $this->belongsToMany('App\Models\SchoolClass', 'class_event','subject_id', 'school+class_id', 'id', 'id');
+        return $this->belongsToMany('App\Models\SchoolClass', 'class_event','subject_id', 'school_class_id', 'id', 'id');
     }
 
 }

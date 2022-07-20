@@ -12,7 +12,7 @@ class ClassGroup extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'class_room_id', 'group_id', 'administrator_id'
+        'school_class_id', 'group_id', 'administrator_id'
     ];
 
     protected $hidden = [

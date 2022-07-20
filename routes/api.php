@@ -34,13 +34,13 @@ use Illuminate\Support\Facades\Route;
 
             Route::post('logout', [App\Http\Controllers\Auth\Student\AuthController::class, 'logout']);
     
-            Route::get('educational_contents/all/{subject_id}', [App\Http\Controllers\User\EducationalContentController::class, 'all']);
+            Route::get('educational-contents/all/{subject_id}', [App\Http\Controllers\User\EducationalContentController::class, 'all']);
             
             Route::get('events/all', [App\Http\Controllers\User\EventController::class, 'all']);
             
             Route::get('justifications/all', [App\Http\Controllers\User\JustificationController::class, 'all']);
             
-            Route::get('justification/{attendance_check_id}', [App\Http\Controllers\User\JustificationController::class, 'showJustification']);
+            Route::get('justifications/{attendance_check_id}', [App\Http\Controllers\User\JustificationController::class, 'showJustification']);
             
             Route::get('scheduales/all/{semester_id}', [App\Http\Controllers\User\ScheduleController::class, 'all']);
     

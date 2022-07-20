@@ -28,18 +28,18 @@ class CreateForeignKeys extends Migration {
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('complaints_receivers', function(Blueprint $table) {
+		Schema::table('complaint_receivers', function(Blueprint $table) {
 			$table->foreign('complaint_id')->references('id')->on('complaints')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('complaints_receivers', function(Blueprint $table) {
+		Schema::table('complaint_receivers', function(Blueprint $table) {
 			$table->foreign('receiver_id')->references('id')->on('users')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
 		Schema::table('class_group', function(Blueprint $table) {
-			$table->foreign('school_class_id')->references('id')->on('classes')
+			$table->foreign('school_class_id')->references('id')->on('school_classes')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
@@ -59,7 +59,7 @@ class CreateForeignKeys extends Migration {
 						->onUpdate('cascade');
 		});
 		Schema::table('class_subject', function(Blueprint $table) {
-			$table->foreign('school_class_id')->references('id')->on('classes')
+			$table->foreign('school_class_id')->references('id')->on('school_classes')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
@@ -83,18 +83,18 @@ class CreateForeignKeys extends Migration {
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
-		Schema::table('attendances_check', function(Blueprint $table) {
+		Schema::table('attendance_checks', function(Blueprint $table) {
 			$table->foreign('student_id')->references('id')->on('students')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
 		Schema::table('justifications', function(Blueprint $table) {
-			$table->foreign('attendance_check_id')->references('id')->on('attendances_check')
+			$table->foreign('attendance_check_id')->references('id')->on('attendance_checks')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
 		Schema::table('class_event', function(Blueprint $table) {
-			$table->foreign('school_class_id')->references('id')->on('classes')
+			$table->foreign('school_class_id')->references('id')->on('school_classes')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
@@ -119,11 +119,11 @@ class CreateForeignKeys extends Migration {
 		Schema::table('complaints', function(Blueprint $table) {
 			$table->dropForeign('complaints_sender_id_foreign');
 		});
-		Schema::table('complaints_receivers', function(Blueprint $table) {
-			$table->dropForeign('complaints_receivers_complaint_id_foreign');
+		Schema::table('complaint_receivers', function(Blueprint $table) {
+			$table->dropForeign('complaint_receivers_complaint_id_foreign');
 		});
-		Schema::table('complaints_receivers', function(Blueprint $table) {
-			$table->dropForeign('complaints_receivers_receiver_id_foreign');
+		Schema::table('complaint_receivers', function(Blueprint $table) {
+			$table->dropForeign('complaint_receivers_receiver_id_foreign');
 		});
 		Schema::table('class_group', function(Blueprint $table) {
 			$table->dropForeign('class_group_school_class_id_foreign');
@@ -152,8 +152,8 @@ class CreateForeignKeys extends Migration {
 		Schema::table('marks', function(Blueprint $table) {
 			$table->dropForeign('marks_student_id_foreign');
 		});
-		Schema::table('attendances_check', function(Blueprint $table) {
-			$table->dropForeign('attendances_check_student_id_foreign');
+		Schema::table('attendance_checks', function(Blueprint $table) {
+			$table->dropForeign('attendance_checks_student_id_foreign');
 		});
 		Schema::table('justifications', function(Blueprint $table) {
 			$table->dropForeign('justifications_attendance_check_id_foreign');

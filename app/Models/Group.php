@@ -20,14 +20,15 @@ class Group extends Model
     ];
 
     ##############################Relationships##############################
-    public function class_group()
+    
+    public function classGroup()
     {
         return $this->hasMany(ClassGroup::class);
     }
 
     public function schoolClasses()
     {
-        return $this->belongsToMany('App\Models\SchoolClass', 'class_group','group_id', 'school_class_id', 'id', 'id');
+        return $this->belongsToMany('App\Models\ClassRoom', 'class_group','group_id', 'scjool_class_id', 'id', 'id');
     }
 
 

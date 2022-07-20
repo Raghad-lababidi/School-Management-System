@@ -20,10 +20,6 @@ class Event extends Model
     ];
 
     ##############################Relationships##############################
-    // public function classEvents()
-    // {
-    //     return $this->hasMany('App\Models\ClassEvent', 'event_id', 'id');
-    // }
 
     public function schoolClasses()
     {

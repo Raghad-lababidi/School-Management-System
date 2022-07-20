@@ -12,7 +12,7 @@ class ClassEvent extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'school_class_id', 'event_id'
+        'class_room_id', 'event_id'
     ];
 
     protected $hidden = [

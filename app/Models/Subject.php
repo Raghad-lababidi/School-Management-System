@@ -20,7 +20,8 @@ class Subject extends Model
     ];
 
     ##############################Relationships##############################
-    public function class_subject()
+    
+    public function classSubjects()
     {
         return $this->hasMany('Class_subject');
     }
@@ -32,7 +33,7 @@ class Subject extends Model
 
     public function schoolClasses()
     {
-        return $this->belongsToMany('App\Models\SchoolClass', 'class_event','subject_id', 'school_class_id', 'id', 'id');
+        return $this->belongsToMany('App\Models\SchoolClass', 'class_event','subject_id', 'school+class_id', 'id', 'id');
     }
 
 }

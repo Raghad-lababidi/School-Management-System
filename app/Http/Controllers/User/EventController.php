@@ -88,22 +88,15 @@ class EventController extends Controller
   }
 
   public function all()
-<<<<<<< HEAD
   { 
-     $class_id = auth()->user()->classGroup->school_class_id;
-     $events = Event::join('class_event', 'events.id', '=', 'class_event.event_id')->where('school_class_id', $class_id)->select('title', 'date', 'description')->get();
+    $class_id = auth()->user()->classGroup->school_class_id;
+    $events = Event::join('class_event', 'events.id', '=', 'class_event.event_id')->where('school_class_id', $class_id)->select('title', 'date', 'description')->get();
 
     if(!$events)
       return this->returnError('E000', 'No Event Found');
 
     return $this->returnData('Events', $events);
-=======
-  {
-   
->>>>>>> 5139ab944cfdc836ea59a23e0b8b577c6c7c7ffe
-    
   }
-  
-}
 
+}
 ?>

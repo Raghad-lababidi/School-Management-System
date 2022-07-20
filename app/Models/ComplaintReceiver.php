@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ComplaintReceiver extends Model
 {
 
-    protected $table = 'complaints_receivers';
+    protected $table = 'complaint_receivers';
 
     public $timestamps = true;
 

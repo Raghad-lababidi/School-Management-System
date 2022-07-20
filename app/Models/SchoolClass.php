@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SchoolClass extends Model
 {
 
-    protected $table = 'classes';
+    protected $table = 'school_classes';
 
     public $timestamps = true;
 
@@ -20,22 +20,7 @@ class SchoolClass extends Model
     ];
 
     ##############################Relationships##############################
-    public function class_group()
-    {
-        return $this->hasMany(ClassGroup::class);
-    }
-
-    public function class_subject()
-    {
-        return $this->hasMany(ClassSubject::class);
-    }
-
-    public function class_events()
-    {
-        return $this->hasMany(ClassEvent::class);
-    }
-
-
+    
     public function groupes()
     {
     	return $this -> belongsToMany('App\Models\Group', 'class_group', 'school_class_id','group_id', 'id', 'id');
@@ -49,8 +34,6 @@ class SchoolClass extends Model
     public function subjects()
     {
     	return $this -> belongsToMany('App\Models\Subject', 'class_subject', 'school_class_id','subject_id', 'id', 'id');
-    }
-
-    
+    } 
 
 }

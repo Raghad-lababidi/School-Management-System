@@ -12,7 +12,7 @@ class ClassSubject extends Model
     public $timestamps = true;
 
     protected $fillable = [
-       'school_class_id', 'subject_id'
+       'class_room_id', 'subject_id'
     ];
 
     protected $hidden = [
@@ -20,7 +20,8 @@ class ClassSubject extends Model
     ];
 
     ##############################Relationships##############################
-    public function educational_content()
+    
+    public function educationalContents()
     {
         return $this->hasMany('Educational_content');
     }

@@ -12,7 +12,7 @@ class ClassGroup extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'school_class_id', 'group_id', 'administrator_id'
+        'class_room_id', 'group_id', 'administrator_id'
     ];
 
     protected $hidden = [
@@ -20,7 +20,8 @@ class ClassGroup extends Model
     ];
 
     ##############################Relationships##############################
-    public function schedule()
+    
+    public function schedules()
     {
         return $this->hasMany('Schedule');
     }

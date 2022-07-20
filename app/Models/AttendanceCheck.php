@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AttendanceCheck extends Model
 {
 
-    protected $table = 'attendances_check';
+    protected $table = 'attendance_checks';
 
     public $timestamps = true;
 
@@ -20,6 +20,7 @@ class AttendanceCheck extends Model
     ];
 
     ##############################Relationships##############################
+    
     public function justification()
     {
         return $this->hasOne(Justification::class);

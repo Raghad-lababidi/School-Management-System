@@ -26,34 +26,40 @@ use Illuminate\Support\Facades\Route;
 
     Route::group(['prefix' => 'student'], function () {
 
+        //login student
         Route::post('login', [App\Http\Controllers\Auth\Student\AuthController::class, 'login']);
     
-        Route::post('logout', [App\Http\Controllers\Auth\Student\AuthController::class, 'logout'])->middleware(['auth.guard:student-api']);
-
         Route::group(['middleware' => 'auth.guard:student-api'], function () {
 
+            //logout student
             Route::post('logout', [App\Http\Controllers\Auth\Student\AuthController::class, 'logout']);
     
+            //show all educational content for subject
             Route::get('educational-contents/all/{subject_id}', [App\Http\Controllers\User\EducationalContentController::class, 'all']);
             
+            //show all events
             Route::get('events/all', [App\Http\Controllers\User\EventController::class, 'all']);
             
+            //show all justifications
             Route::get('justifications/all', [App\Http\Controllers\User\JustificationController::class, 'all']);
             
+            //show justification of one attendance
             Route::get('justifications/{attendance_check_id}', [App\Http\Controllers\User\JustificationController::class, 'showJustification']);
             
+            //show all scheduales
             Route::get('scheduales/all/{semester_id}', [App\Http\Controllers\User\ScheduleController::class, 'all']);
     
+            //show all subjects
             Route::get('subjects/all', [App\Http\Controllers\User\SubjectController::class, 'all']);
             
+            //show all marks
             Route::get('marks/all/{semester_id}', [App\Http\Controllers\User\MarkController::class, 'all']);
+
+            //add justification
+            Route::post('justifications/add/{attendance_check_id}', [App\Http\Controllers\User\JustificationController::class, 'store']);
         });
     
     });
-
-
-    
-
 
 
 

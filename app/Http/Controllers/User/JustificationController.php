@@ -5,10 +5,12 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Models\Justification;
 use App\Traits\GeneralTrait;
+use App\Traits\FileTrait;
 
 class JustificationController extends Controller 
 {
   use GeneralTrait;
+  use FileTrait;
 
   /**
    * Display a listing of the resource.
@@ -35,8 +37,18 @@ class JustificationController extends Controller
    *
    * @return Response
    */
-  public function store(Request $request)
+  public function store(Request $request, $attendance_check_id)
   {
+     //save pdf in folder.
+    $file_name = $this -> saveFile($request -> file , 'educationalContent/files');
+
+    $justification = Justification::create([
+         'text'=> $request->text,
+         'file'=> $file_name,
+         'attendance_check_id'=> $attendance_check_id,
+     ]);
+
+      return $this->returnSuccessMessage('Justification Add Successfully');
     
   }
 
@@ -87,7 +99,7 @@ class JustificationController extends Controller
   public function all()
   {
     $student_id = auth()->user()->id;
-    $justifications = Justification::join('attendances_check','justifications.attendance_check_id','=','attendances_check.id')->where('attendances_check.student_id', $student_id)->select('text', 'file')->get();
+    $justifications = Justification::join('attendance_checks','justifications.attendance_check_id','=','attendance_checks.id')->where('attendance_checks.student_id', $student_id)->select('text', 'file')->get();
 
     if(!$justifications)
       return this->returnError('E000', 'No Justifications Found');
@@ -97,7 +109,7 @@ class JustificationController extends Controller
 
   public function showJustification($attendance_check_id)
   {
-    $justification = Justification::join('attendances_check','justifications.attendance_check_id','=','attendances_check.id')->where('attendances_check.id', $attendance_check_id)->select('text', 'file')->get();
+    $justification = Justification::join('attendance_checks','justifications.attendance_check_id','=','attendance_checks.id')->where('attendance_checks.id', $attendance_check_id)->select('text', 'file')->get();
    
     if(!$justification)
       return this->returnError('E000', 'No Justification Found');

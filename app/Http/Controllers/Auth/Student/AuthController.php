@@ -35,7 +35,7 @@ class AuthController extends Controller
             if (!$token)
                 return $this->returnError('E001', 'The login information is incorrect');
 
-            $student = Auth::guard('student-api')->user();
+            $student = Auth::guard('student-api')->user()->select('user_name');
             $student->api_token = $token;
 
             return $this->returnData('student', $student);  

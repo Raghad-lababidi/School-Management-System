@@ -60,9 +60,9 @@ class Student extends Authenticatable  implements JWTSubject
         return $this->hasMany(AttendanceCheck::class);
     }
 
-    public function class_group()
+    public function classGroup()
     {
-        return $this->belongsTo(ClassGroup::class);
+        return $this->belongsTo('App\Models\ClassGroup', 'class_group_id', 'id');
     }
 
 }

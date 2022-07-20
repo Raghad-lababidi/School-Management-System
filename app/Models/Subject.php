@@ -1,6 +1,6 @@
 <?php
 
-namespace subject;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,6 +28,11 @@ class Subject extends Model
     public function marks()
     {
         return $this->hasMany('Mark');
+    }
+
+    public function schoolClasses()
+    {
+        return $this->belongsToMany('App\Models\SchoolClass', 'class_event','subject_id', 'school_class_id', 'id', 'id');
     }
 
 }

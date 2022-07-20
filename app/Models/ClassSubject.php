@@ -1,6 +1,6 @@
 <?php
 
-namespace ClassSubject;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class ClassSubject extends Model
     public $timestamps = true;
 
     protected $fillable = [
-       'class_id', 'subject_id'
+       'school_class_id', 'subject_id'
     ];
 
     protected $hidden = [

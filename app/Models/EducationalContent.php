@@ -1,6 +1,6 @@
 <?php
 
-namespace EducationalContent;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

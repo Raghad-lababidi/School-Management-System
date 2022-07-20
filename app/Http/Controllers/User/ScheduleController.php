@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use App\Models\Schedule;
+use App\Traits\GeneralTrait;
 
 class ScheduleController extends Controller 
 {
+  use GeneralTrait;
 
   /**
    * Display a listing of the resource.
@@ -80,7 +83,18 @@ class ScheduleController extends Controller
   {
     
   }
-  
+
+  public function all($semester_id)
+  {
+    $student_class_group_id = auth()->user()->class_group_id;
+
+    $scheduals = Schedule::where('class_group_id', $student_class_group_id)->where('semester', $semester_id)->select('type', 'file')->get();
+
+    if(!$scheduals)
+      return this->returnError('E000', 'No Scheduals Found');
+
+      return $this->returnData('Scheduals', $scheduals); 
+  }
 }
 
 ?>

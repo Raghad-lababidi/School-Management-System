@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use App\Traits\GeneralTrait;
+use App\Models\Mark;
 
 class MarkController extends Controller 
 {
+
+  use GeneralTrait;
 
   /**
    * Display a listing of the resource.
@@ -79,6 +83,18 @@ class MarkController extends Controller
   public function destroy($id)
   {
     
+  }
+
+  public function all($semester_id)
+  {
+    $student_id = auth()->user()->id;
+    
+    $marks = Mark::where('student_id', $student_id)->with(['subject' => function($query){ $query->select('name');}])->select('type', 'value')->get(); 
+    
+    if(!$marks)
+      return this->returnError('E000', 'No Marks Found');
+
+    return $this->returnData('marks', $marks);
   }
   
 }

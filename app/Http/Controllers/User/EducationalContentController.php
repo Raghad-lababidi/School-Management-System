@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\EducationalContent;
 use Illuminate\Http\Request;
+
+use App\Traits\GeneralTrait;
+
 
 class EducationalContentController extends Controller
 {
 
+    use GeneralTrait;
   /**
    * Display a listing of the resource.
    *
@@ -81,6 +86,17 @@ class EducationalContentController extends Controller
 
   }
 
-}
+  public function all($subject_id)
+  {
+    $class_id = auth()->user()->classGroup->school_class_id;
 
-?>
+    $files = EducationalContent::join('class_subject', 'educational_contents.class_subject_id', '=', 'class_subject.id')
+    ->select('title', 'file')->where('class_subject.school_class_id', $class_id)->where('class_subject.subject_id' ,$subject_id)->get();
+
+    if(!$files)
+      return this->returnError('E000', 'No Educational Content Found');
+
+     return $this->returnData('Educational Content', $files); 
+  }
+
+}

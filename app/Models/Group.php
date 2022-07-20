@@ -25,4 +25,11 @@ class Group extends Model
         return $this->hasMany(ClassGroup::class);
     }
 
+    public function schoolClasses()
+    {
+        return $this->belongsToMany('App\Models\SchoolClass', 'class_group','group_id', 'school_class_id', 'id', 'id');
+    }
+
+
+
 }

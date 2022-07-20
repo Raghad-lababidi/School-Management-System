@@ -35,4 +35,22 @@ class SchoolClass extends Model
         return $this->hasMany(ClassEvent::class);
     }
 
+
+    public function groupes()
+    {
+    	return $this -> belongsToMany('App\Models\Group', 'class_group', 'school_class_id','group_id', 'id', 'id');
+    }
+
+    public function events()
+    {
+    	return $this -> belongsToMany('App\Models\Event', 'class_event', 'school_class_id','event_id', 'id', 'id');
+    }
+
+    public function subjects()
+    {
+    	return $this -> belongsToMany('App\Models\Subject', 'class_subject', 'school_class_id','subject_id', 'id', 'id');
+    }
+
+    
+
 }

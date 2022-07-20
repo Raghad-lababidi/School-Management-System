@@ -1,6 +1,6 @@
 <?php
 
-namespace event;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,9 +20,14 @@ class Event extends Model
     ];
 
     ##############################Relationships##############################
-    public function class_events()
+    // public function classEvents()
+    // {
+    //     return $this->hasMany('App\Models\ClassEvent', 'event_id', 'id');
+    // }
+
+    public function schoolClasses()
     {
-        return $this->hasMany('Class_event');
+        return $this->belongsToMany('App\Models\SchoolClass', 'class_event','event_id', 'school_class_id', 'id', 'id');
     }
 
 }

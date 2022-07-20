@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Subject;
 use Illuminate\Http\Request;
+use App\Traits\GeneralTrait;
 
 class SubjectController extends Controller 
 {
+  use GeneralTrait;
 
   /**
    * Display a listing of the resource.
@@ -80,7 +83,21 @@ class SubjectController extends Controller
   {
     
   }
+
+  public function all()
+  {
+    $class_id = auth()->user()->classGroup->school_class_id;
+
+    $subjects = Subject::join('class_subject', 'class_subject.subject_id', '=', 'subjects.id')->where('class_subject.school_class_id', $class_id)->select('name')->get();
+
+    if(!$subjects)
+      return this->returnError('E000', 'No Subjects Found');
+
+    return $this->returnData('Subjects', $subjects); 
+  }
+    
+  }
   
-}
+
 
 ?>

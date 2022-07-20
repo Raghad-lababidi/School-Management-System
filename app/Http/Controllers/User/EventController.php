@@ -4,9 +4,14 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use App\Traits\GeneralTrait;
+
 
 class EventController extends Controller 
 {
+
+  use GeneralTrait;
+
 
   /**
    * Display a listing of the resource.
@@ -83,8 +88,14 @@ class EventController extends Controller
   }
 
   public function all()
-  {
-    Event::
+  { 
+     $class_id = auth()->user()->classGroup->school_class_id;
+     $events = Event::join('class_event', 'events.id', '=', 'class_event.event_id')->where('school_class_id', $class_id)->select('title', 'date', 'description')->get();
+
+    if(!$events)
+      return this->returnError('E000', 'No Event Found');
+
+    return $this->returnData('Events', $events);
     
   }
   

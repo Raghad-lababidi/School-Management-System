@@ -1,6 +1,6 @@
 <?php
 
-namespace ClassEvent;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class ClassEvent extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'class_id', 'event_id'
+        'school_class_id', 'event_id'
     ];
 
     protected $hidden = [
@@ -20,5 +20,6 @@ class ClassEvent extends Model
     ];
 
     ##############################Relationships##############################
+
 
 }

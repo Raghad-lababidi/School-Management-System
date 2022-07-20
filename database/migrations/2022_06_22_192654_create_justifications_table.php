@@ -11,7 +11,7 @@ class CreateJustificationsTable extends Migration {
 		Schema::create('justifications', function(Blueprint $table) {
 			$table->bigIncrements('id');
 			$table->text('text');
-			$table->string('file');
+			$table->string('file')->default('null');
 			$table->unsignedBigInteger('attendance_check_id');
 			$table->timestamps();
 		});

@@ -8,7 +8,7 @@ use App\Models\AttendanceCheck;
 class AttendanceCheckController extends Controller
 {
 
-  public function student_attendance($id)
+  public function studentAttendance($id)
   {
      $attendances = AttendanceCheck::where('student_id',$id)->get();
     if (isset($attendances)) {

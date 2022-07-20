@@ -1,6 +1,6 @@
 <?php
 
-namespace mark;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,5 +20,10 @@ class Mark extends Model
     ];
 
     ##############################Relationships##############################
+
+    public function subject()
+    {
+        return $this->belongsTo('App\Models\Subject', 'subject_id', 'id');
+    }
 
 }

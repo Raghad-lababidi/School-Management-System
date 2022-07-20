@@ -20,4 +20,9 @@ class Complaint extends Model
     ];
 
     ##############################Relationships##############################
+
+    public function receiver()
+    {
+        return $this -> hasOne(ComplaintReceiver::class);
+    }
 }

@@ -20,4 +20,14 @@ class ComplaintReceiver extends Model
     ];
 
     ##############################Relationships##############################
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function complaint()
+    {
+        return $this->belongsTo(Complaint::class);
+    }
 }

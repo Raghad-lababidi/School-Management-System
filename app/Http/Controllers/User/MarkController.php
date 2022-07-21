@@ -92,7 +92,7 @@ class MarkController extends Controller
     $marks = Mark::where('student_id', $student_id)->with(['subject' => function($query){ $query->select('name');}])->select('type', 'value')->get(); 
     
     if(!$marks)
-      return this->returnError('E000', 'No Marks Found');
+      return $this->returnError('E000', 'No Marks Found');
 
     return $this->returnData('marks', $marks);
   }

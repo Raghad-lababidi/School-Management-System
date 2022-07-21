@@ -91,7 +91,7 @@ class ScheduleController extends Controller
     $scheduals = Schedule::where('class_group_id', $student_class_group_id)->where('semester', $semester_id)->select('type', 'file')->get();
 
     if(!$scheduals)
-      return this->returnError('E000', 'No Scheduals Found');
+      return $this->returnError('E000', 'No Scheduals Found');
 
       return $this->returnData('Scheduals', $scheduals); 
   }

@@ -93,7 +93,7 @@ class EventController extends Controller
     $events = Event::join('class_event', 'events.id', '=', 'class_event.event_id')->where('school_class_id', $class_id)->select('title', 'date', 'description')->get();
 
     if(!$events)
-      return this->returnError('E000', 'No Event Found');
+      return $this->returnError('E000', 'No Event Found');
 
     return $this->returnData('Events', $events);
   }

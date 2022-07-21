@@ -102,7 +102,7 @@ class JustificationController extends Controller
     $justifications = Justification::join('attendance_checks','justifications.attendance_check_id','=','attendance_checks.id')->where('attendance_checks.student_id', $student_id)->select('text', 'file')->get();
 
     if(!$justifications)
-      return this->returnError('E000', 'No Justifications Found');
+      return $this->returnError('E000', 'No Justifications Found');
 
       return $this->returnData('Justifications', $justifications); 
   }
@@ -112,7 +112,7 @@ class JustificationController extends Controller
     $justification = Justification::join('attendance_checks','justifications.attendance_check_id','=','attendance_checks.id')->where('attendance_checks.id', $attendance_check_id)->select('text', 'file')->get();
    
     if(!$justification)
-      return this->returnError('E000', 'No Justification Found');
+      return $this->returnError('E000', 'No Justification Found');
 
       return $this->returnData('Justification', $justification); 
   }

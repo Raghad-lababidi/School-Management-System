@@ -8,7 +8,7 @@ use App\Models\ComplaintReceiver;
 class ComplaintReceiverController extends Controller
 {
 
-  public function student_receivedcomplaints($id)
+  public function StudentReceivedComplaints($id)
   {
      $compaints = ComplaintReceiver::where('receiver_id',$id)
     ->join('complaints','complaints_receivers.complaint_id','=','complaints.id')
@@ -26,7 +26,7 @@ class ComplaintReceiverController extends Controller
     return response()->json($response,404) ;
   }
 
-  public function administrator_receivedcomplaints($id)
+  public function AdministratorReceivedComplaints($id)
   {
      $compaints = ComplaintReceiver::where('receiver_id',$id)
     ->join('complaints','complaints_receivers.complaint_id','=','complaints.id')

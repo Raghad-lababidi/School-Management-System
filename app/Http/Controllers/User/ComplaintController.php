@@ -9,7 +9,7 @@ use App\Models\User;
 
 class ComplaintController extends Controller 
 {
-  public function student_sentcomplaints($id)
+  public function StudentSentComplaints($id)
   {
      $compaints = Complaint::where('sender_id',$id)->get();
     if (isset($compaints)) {
@@ -24,7 +24,7 @@ class ComplaintController extends Controller
     return response()->json($response,404) ;
   }
  
-  public function administrator_sentcomplaints($id)
+  public function AdministratorSentComplaints($id)
   {
      $compaints = Complaint::where('sender_id',$id)
      ->join('complaints_receivers','complaints.id','=','complaint_id')
@@ -43,7 +43,7 @@ class ComplaintController extends Controller
     return response()->json($response,404) ;
   }
 
-  public function add_administrator_complaint(Request $request)
+  public function AddAdministratorComplaint(Request $request)
   {
   
     $compaint =new Complaint;
@@ -67,7 +67,7 @@ class ComplaintController extends Controller
      
   }
 
-  public function add_student_complaint(Request $request)
+  public function AddStudentComplaint(Request $request)
   {
   
     $compaint =new Complaint;

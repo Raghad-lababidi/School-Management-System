@@ -26,7 +26,7 @@ class ClassController extends Controller
   }
 
 
-  public function allclasses()
+  public function all()
   {
     $classes = schoolClass::all();
     if (isset($classes)) {
@@ -41,7 +41,7 @@ class ClassController extends Controller
     return response()->json($response,404) ;
   }
 
-  public function add_class(Request $request)
+  public function add(Request $request)
   {
      $class =new SchoolClass;
    

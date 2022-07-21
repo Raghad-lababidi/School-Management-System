@@ -30,7 +30,7 @@ class StudentController extends Controller
     return response()->json($response,404) ;
   }
 
-  public function add_student(Request $request)
+  public function add(Request $request)
   {
      $user =new User;
      $student = new Student;

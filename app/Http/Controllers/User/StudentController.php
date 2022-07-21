@@ -12,7 +12,7 @@ class StudentController extends Controller
 
   public function groupstudents($class_id,$group_id)
   {
-     $students = Student::whereHas('class_group', function($q)use($class_id,$group_id){
+     $students = Student::whereHas('classGroup', function($q)use($class_id,$group_id){
       $q->where('school_class_id',$class_id)
         ->where('group_id',$group_id);
     })->join('users','students.user_id','=','users.id')

@@ -28,8 +28,8 @@ class ComplaintController extends Controller
   {
      $compaints = Complaint::where('sender_id',$id)
      ->join('complaints_receivers','complaints.id','=','complaint_id')
-     ->join('users','complaints_receivers.receiver_id','=','users.id')
-     ->select('complaints.*','complaints_receivers.receiver_id','first_name','last_name')
+     ->join('users','complaint_receivers.receiver_id','=','users.id')
+     ->select('complaints.*','complaint_receivers.receiver_id','first_name','last_name')
      ->get();
     if (isset($compaints)) {
     $response['data'] =$compaints->values();

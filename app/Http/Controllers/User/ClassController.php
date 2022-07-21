@@ -10,7 +10,7 @@ class ClassController extends Controller
 
   public function classesforadministrator($id)
   {
-     $classes = schoolClass::whereHas('class_group', function($q)use($id){
+     $classes = schoolClass::whereHas('groupes', function($q)use($id){
       $q->where('administrator_id',$id);
     })->get();
     if (isset($classes)) {

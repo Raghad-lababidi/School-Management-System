@@ -10,7 +10,7 @@ class GroupController extends Controller
 
   public function groupsforadministrator($id)
   {
-     $groups = Group::whereHas('class_group', function($q)use($id){
+     $groups = Group::whereHas('classGroup', function($q)use($id){
       $q->where('administrator_id',$id);
     })->get();
     if (isset($groups)) {

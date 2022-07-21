@@ -29,9 +29,9 @@ class ComplaintReceiverController extends Controller
   public function AdministratorReceivedComplaints($id)
   {
      $compaints = ComplaintReceiver::where('receiver_id',$id)
-    ->join('complaints','complaints_receivers.complaint_id','=','complaints.id')
+    ->join('complaints','complaint_receivers.complaint_id','=','complaints.id')
     ->join('users','complaints.sender_id','=','users.id')
-    ->select('complaints.*','complaints_receivers.receiver_id','first_name','last_name')
+    ->select('complaints.*','complaint_receivers.receiver_id','first_name','last_name')
      ->get();
     if (isset($compaints)) {
     $response['data'] =$compaints->values();

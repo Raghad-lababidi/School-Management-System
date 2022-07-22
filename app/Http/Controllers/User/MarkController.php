@@ -87,10 +87,11 @@ class MarkController extends Controller
 
   public function all($semester_id)
   {
-    $student_id = auth()->user()->id;
+    $student_id = auth()->user()->id;  
     
-    $marks = Mark::where('student_id', $student_id)->with(['subject' => function($query){ $query->select('name');}])->select('type', 'value')->get(); 
-    
+    $marks = Mark::join('subjects', 'subjects.id', '=', 'marks.subject_id')
+    ->where('marks.semester', $semester_id)->where('marks.student_id', $student_id)
+    ->select('marks.type', 'marks.value', 'subjects.name')->get();
     if(!$marks)
       return $this->returnError('E000', 'No Marks Found');
 

@@ -57,6 +57,10 @@ use Illuminate\Support\Facades\Route;
 
             //add justification
             Route::post('justifications/add/{attendance_check_id}', [App\Http\Controllers\User\JustificationController::class, 'store']);
+
+             //show all attendances for one student 
+             Route::get( '/Attendances',[App\Http\Controllers\User\AttendanceCheckController::class, 'Attendances']);
+    
         });
     
     });

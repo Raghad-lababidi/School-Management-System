@@ -3,26 +3,22 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use App\Traits\GeneralTrait;
 use App\Models\Group;
 
 class GroupController extends Controller 
 {
-
-  public function groupsforadministrator($id)
+  use GeneralTrait; 
+  public function groupsforadministrator()
   {
-     $groups = Group::whereHas('classGroup', function($q)use($id){
-      $q->where('administrator_id',$id);
+    $administrator_id = auth()->user()->id; 
+     $groups = Group::whereHas('classGroup', function($q)use($administrator_id){
+      $q->where('administrator_id',$administrator_id);
     })->get();
-    if (isset($groups)) {
-    $response['data'] =$groups->values();
-    $response['message'] = "success";
-    $response['status_code'] = 200;
-    return response()->json($response,200) ;
-    }
-    $response['data'] =$groups->values();
-    $response['message'] = "error";
-    $response['status_code'] = 404;
-    return response()->json($response,404) ;
+    if(!$groups)
+    return $this->returnError('E000', 'No Groups Found');
+
+  return $this->returnData('Groups',$groups); 
   }
 
  

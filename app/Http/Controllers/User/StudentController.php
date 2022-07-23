@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use App\Traits\GeneralTrait;
 use App\Models\Student;
 use App\Models\User;
 use App\Models\ClassGroup;
@@ -10,6 +11,7 @@ use App\Models\ClassGroup;
 class StudentController extends Controller 
 {
 
+  use GeneralTrait;
   public function groupstudents($class_id,$group_id)
   {
      $students = Student::whereHas('classGroup', function($q)use($class_id,$group_id){
@@ -18,17 +20,12 @@ class StudentController extends Controller
     })->join('users','students.user_id','=','users.id')
     ->select('students.id','students.user_id','first_name','last_name','father_name','mother_name','students.phone')
     ->get();
-    if (isset($students)) {
-    $response['data'] =$students->values();
-    $response['message'] = "success";
-    $response['status_code'] = 200;
-    return response()->json($response,200) ;
-    }
-    $response['data'] =$students->values();
-    $response['message'] = "error";
-    $response['status_code'] = 404;
-    return response()->json($response,404) ;
+    if(!$students)
+    return $this->returnError('E000', 'No Students Found');
+
+  return $this->returnData('Students',$students); 
   }
+
 
   public function add(Request $request)
   {

@@ -3,98 +3,80 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use App\Traits\GeneralTrait;
 use App\Models\Complaint;
 use App\Models\ComplaintReceiver;
 use App\Models\User;
 
 class ComplaintController extends Controller 
 {
-  public function StudentSentComplaints($id)
+  use GeneralTrait;
+  public function StudentSentComplaints()
   {
-     $compaints = Complaint::where('sender_id',$id)->get();
-    if (isset($compaints)) {
-    $response['data'] =$compaints->values();
-    $response['message'] = "success";
-    $response['status_code'] = 200;
-    return response()->json($response,200) ;
-    }
-    $response['data'] =$compaints->values();
-    $response['message'] = "error";
-    $response['status_code'] = 404;
-    return response()->json($response,404) ;
+    $user_id = auth()->user()->user_id;
+     $compaints = Complaint::where('sender_id',$user_id)->get();
+     if(!$compaints)
+     return $this->returnError('E000', 'No Sent Compaints Found');
+ 
+   return $this->returnData('Compaints',$compaints); 
   }
  
-  public function AdministratorSentComplaints($id)
+  public function AdministratorSentComplaints()
   {
-     $compaints = Complaint::where('sender_id',$id)
-     ->join('complaints_receivers','complaints.id','=','complaint_id')
+    $user_id = auth()->user()->user_id;
+     $compaints = Complaint::where('sender_id', $user_id)
+     ->join('complaint_receivers','complaints.id','=','complaint_id')
      ->join('users','complaint_receivers.receiver_id','=','users.id')
      ->select('complaints.*','complaint_receivers.receiver_id','first_name','last_name')
      ->get();
-    if (isset($compaints)) {
-    $response['data'] =$compaints->values();
-    $response['message'] = "success";
-    $response['status_code'] = 200;
-    return response()->json($response,200) ;
-    }
-    $response['data'] =$compaints->values();
-    $response['message'] = "error";
-    $response['status_code'] = 404;
-    return response()->json($response,404) ;
+     if(!$compaints)
+     return $this->returnError('E000', 'No Sent Compaints Found');
+ 
+   return $this->returnData('Compaints',$compaints); 
   }
 
   public function AddAdministratorComplaint(Request $request)
   {
-  
-    $compaint =new Complaint;
-    $compaint->title = $request->title;
-    $compaint->text = $request->text;
-    $compaint->date = $request->date;
-    $compaint->sender_id = $request->sender_id;
+    $sender_id = auth()->user()->user_id;
+    $compaint = Complaint::create([
+    'title' => $request->title,
+    'text' => $request->text,
+    'date' => $request->date,
+    'sender_id' => $sender_id,
+  ]);
+ 
 
-    $compaint->save();
+    $receive = ComplaintReceiver::create([
+    'complaint_id'=> $compaint->id,
+   ' receiver_id'=> $request->receiver_id,
+  ]);
 
-    $receive = new ComplaintReceiver;
-    $receive->complaint_id=$compaint->id;
-    $receive->receiver_id=$request->receiver_id;
-
-    $receive->save();
-
-     $response['data'] =$compaint;
-     $response['message'] = "store success";
-     $response['status_code'] = 200;
-     return response()->json($response,200) ;
-     
+    return $this->returnSuccessMessage('Complaint Add Successfully');
   }
 
   public function AddStudentComplaint(Request $request)
   {
+
+   $sender_id = auth()->user()->user_id;
+
+    $compaint = Complaint::create([
+      'title' => $request->title,
+      'text' => $request->text,
+      'date' => $request->date,
+      'sender_id' => $sender_id,
+    ]);
+ 
+    $receiver_id = auth()->user()->classGroup->administrator_id;
+   
+    $receive = ComplaintReceiver::create([
+      'complaint_id' => $compaint->id,
+      'receiver_id' => $receiver_id ,
+    ]);
   
-    $compaint =new Complaint;
-    $compaint->title = $request->title;
-    $compaint->text = $request->text;
-    $compaint->date = $request->date;
-    $compaint->sender_id = $request->sender_id;
-
-    $compaint->save();
-
-    $receiver_id=User::where('users.id',$request->sender_id)
-    ->join('students','users.id','=','students.user_id')
-    ->join('class_group','students.class_group_id','=','class_group.id')
-    ->pluck('class_group.administrator_id');
-
-    $receive = new ComplaintReceiver;
-    $receive->complaint_id=$compaint->id;
-    $receive->receiver_id=$receiver_id[0];
-
-    $receive->save();
-
-     $response['data'] =$compaint;
-     $response['message'] = "store success";
-     $response['status_code'] = 200;
-     return response()->json($response,200) ;
+    return $this->returnSuccessMessage('Complaint Add Successfully');
      
   }
+
 
 }
 

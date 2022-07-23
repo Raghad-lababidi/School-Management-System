@@ -48,7 +48,7 @@ class ComplaintController extends Controller
 
     $receive = ComplaintReceiver::create([
     'complaint_id'=> $compaint->id,
-   ' receiver_id'=> $request->receiver_id,
+    'receiver_id' => $request->receiver_id,
   ]);
 
     return $this->returnSuccessMessage('Complaint Add Successfully');
@@ -56,8 +56,7 @@ class ComplaintController extends Controller
 
   public function AddStudentComplaint(Request $request)
   {
-
-   $sender_id = auth()->user()->user_id;
+    $sender_id = auth()->user()->user_id;
 
     $compaint = Complaint::create([
       'title' => $request->title,

@@ -43,7 +43,18 @@ use Illuminate\Support\Facades\Route;
     
              //add administrator complaint
              Route::post( 'complaints/add',[App\Http\Controllers\User\ComplaintController::class, 'AddAdministratorComplaint']);
-    
+
+             //show attendance checks for a specific student
+             Route::get( 'attendances/all/{id}',[App\Http\Controllers\User\AttendanceCheckController::class, 'studentAttendances']);
+
+             //show all marks for a specific student
+            Route::get('marks/all/{semester_id}/{student_id}', [App\Http\Controllers\User\MarkController::class, 'studentMarks']);
+
+             //show all scheduales for administrator's groups
+             Route::get( 'scheduales/all/{semester_id}',[App\Http\Controllers\User\ScheduleController::class, 'admineSchedules']);
+
+            //show all events for administrator's classes
+            Route::get( 'events/all',[App\Http\Controllers\User\EventController::class, 'admineEvents']);
  
          });
     });
@@ -52,7 +63,8 @@ use Illuminate\Support\Facades\Route;
 
         //login student
         Route::post('login', [App\Http\Controllers\Auth\Student\AuthController::class, 'login']);
-    
+
+        //for logged in student
         Route::group(['middleware' => 'auth.guard:student-api'], function () {
 
             //logout student
@@ -67,7 +79,7 @@ use Illuminate\Support\Facades\Route;
             //show all justifications
             Route::get('justifications/all', [App\Http\Controllers\User\JustificationController::class, 'all']);
             
-            //show justification of one attendance
+            //show justification of specific attendance
             Route::get('justifications/{attendance_check_id}', [App\Http\Controllers\User\JustificationController::class, 'showJustification']);
             
             //show all scheduales

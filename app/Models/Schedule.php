@@ -20,4 +20,9 @@ class Schedule extends Model
     ];
 
     ##############################Relationships##############################
+    
+    public function classGroup()
+    {
+        return $this->belongsTo('App\Models\ClassGroup', 'class_group_id', 'id');
+    }
 }

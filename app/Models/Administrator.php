@@ -50,7 +50,7 @@ class Administrator extends Authenticatable  implements JWTSubject
 
     public function classGroup()
     {
-        return $this->belongsTo('App\Models\ClassGroup', 'class_group_id', 'id');
+        return $this->hasMany('App\Models\ClassGroup', 'administrator_id', 'id');
     }
 
 }

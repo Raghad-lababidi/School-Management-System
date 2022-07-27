@@ -23,7 +23,7 @@ class ClassGroup extends Model
     
     public function schedules()
     {
-        return $this->hasMany('Schedule');
+        return $this->hasMany('App\Models\Schedule', 'class_group_id', 'id');
     }
 
     public function group()

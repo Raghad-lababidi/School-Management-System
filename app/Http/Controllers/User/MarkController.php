@@ -97,6 +97,17 @@ class MarkController extends Controller
 
     return $this->returnData('marks', $marks);
   }
+
+  public function studentMarks($semester_id, $student_id)
+  {
+    $marks = Mark::join('subjects', 'subjects.id', '=', 'marks.subject_id')
+    ->where('marks.semester', $semester_id)->where('marks.student_id', $student_id)
+    ->select('marks.type', 'marks.value', 'subjects.name')->get();
+    if(!$marks)
+      return $this->returnError('E000', 'No Marks Found');
+
+    return $this->returnData('marks', $marks);
+  }
   
 }
 

@@ -98,5 +98,21 @@ class EventController extends Controller
     return $this->returnData('Events', $events);
   }
 
+  public function admineEvents()
+  { 
+    $administrator_id = auth()->user()->id;
+  
+    $events = Event::join('class_event', 'class_event.event_id', '=', 'events.id')
+    ->join('school_classes', 'school_classes.id', '=', 'class_event.school_class_id')
+    ->join('class_group', 'class_group.school_class_id', 'school_classes.id')
+    ->where('class_group.administrator_id', $administrator_id)
+    ->select('title', 'date', 'description', 'school_classes.name as class')->get();
+
+    if(!$events)
+      return $this->returnError('E000', 'No Event Found');
+
+    return $this->returnData('Events', $events);
+  }
+
 }
 ?>

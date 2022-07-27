@@ -20,7 +20,15 @@ use Illuminate\Support\Facades\Route;
 
         Route::post('login', [App\Http\Controllers\Auth\Administrator\AuthController::class, 'login']);
 
-        Route::post('logout',[App\Http\Controllers\Auth\Administrator\AuthController::class, 'logout']) -> middleware(['auth.guard:administrator-api']);
+        Route::group(['middleware' => 'auth.guard:administrator-api'], function () {
+
+            //logout student
+            Route::post('logout',[App\Http\Controllers\Auth\Administrator\AuthController::class, 'logout']);
+
+            
+    
+           
+        });
 
     });
 

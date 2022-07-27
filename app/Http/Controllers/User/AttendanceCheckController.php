@@ -3,40 +3,33 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use App\Traits\GeneralTrait;
 use App\Models\AttendanceCheck;
 
 class AttendanceCheckController extends Controller
 {
-
-  public function studentAttendance($id)
+  use GeneralTrait;
+  public function Attendances()
   {
-     $attendances = AttendanceCheck::where('student_id',$id)->get();
-    if (isset($attendances)) {
-    $response['data'] =$attendances->values();
-    $response['message'] = "success";
-    $response['status_code'] = 200;
-    return response()->json($response,200) ;
-    }
-    $response['data'] =$attendances->values();
-    $response['message'] = "error";
-    $response['status_code'] = 404;
-    return response()->json($response,404) ;
+    $student_id = auth()->user()->id;
+
+    $attendances = AttendanceCheck::where('student_id',$student_id)->get();
+
+    if(!$attendances)
+    return $this->returnError('E000', 'No Attendances Found');
+
+  return $this->returnData('Attendances',$attendances); 
   }
 
-  public function AttendanceType($id,$type)
+  public function AttendancesType($type)
   {
-     $attendances = AttendanceCheck::where('student_id',$id)
+    $student_id = auth()->user()->id;
+     $attendances = AttendanceCheck::where('student_id',$student_id )
      ->where('type',$type)->get();
-    if (isset($attendances)) {
-    $response['data'] =$attendances->values();
-    $response['message'] = "success";
-    $response['status_code'] = 200;
-    return response()->json($response,200) ;
-    }
-    $response['data'] =$attendances->values();
-    $response['message'] = "error";
-    $response['status_code'] = 404;
-    return response()->json($response,404) ;
+     if(!$attendances)
+     return $this->returnError('E000', 'No Attendances for this type Found');
+ 
+   return $this->returnData('Attendances',$attendances); 
   }
 
   }

@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\Auth\Administrator\AuthController;
-use App\Http\Controllers\User\GroupController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,18 +15,37 @@ use Illuminate\Support\Facades\Route;
  
     Route::group(['prefix' => 'administrator'],function (){
 
-        Route::post('login', [App\Http\Controllers\Auth\Administrator\AuthController::class, 'login']);
+         //login administrator
+         Route::post('login', [App\Http\Controllers\Auth\Administrator\AuthController::class, 'login']);
 
-        Route::group(['middleware' => 'auth.guard:administrator-api'], function () {
-
-            //logout student
-            Route::post('logout',[App\Http\Controllers\Auth\Administrator\AuthController::class, 'logout']);
-
-            
+         Route::group(['middleware' => 'auth.guard:administrator-api'], function () {
+ 
+             //logout administrator
+             Route::post('logout',[App\Http\Controllers\Auth\Administrator\AuthController::class, 'logout']);
+ 
+             //show all groups for administrator
+             Route::get( 'groups',[App\Http\Controllers\User\GroupController::class, 'groupsforadministrator']);
     
-           
-        });
-
+             //show all classesfor administrator
+             Route::get( 'classes',[App\Http\Controllers\User\ClassController::class, 'classesforadministrator']);
+     
+             //show all classes
+             Route::get( 'classes/all',[App\Http\Controllers\User\ClassController::class, 'all']);
+    
+             //show all studends in group
+             Route::get( 'group/students/{class_id}/{group_id}',[App\Http\Controllers\User\StudentController::class, 'groupstudents']);
+     
+             //show all sent complaints for administrator
+             Route::get( 'complaints/sent',[App\Http\Controllers\User\ComplaintController::class, 'AdministratorSentComplaints']);
+    
+             //show all received complaints for administrator
+             Route::get( 'complaints/received',[App\Http\Controllers\User\ComplaintReceiverController::class, 'AdministratorReceivedComplaints']);
+    
+             //add administrator complaint
+             Route::post( 'complaints/add',[App\Http\Controllers\User\ComplaintController::class, 'AddAdministratorComplaint']);
+    
+ 
+         });
     });
 
     Route::group(['prefix' => 'student'], function () {
@@ -65,36 +81,28 @@ use Illuminate\Support\Facades\Route;
 
             //add justification
             Route::post('justifications/add/{attendance_check_id}', [App\Http\Controllers\User\JustificationController::class, 'store']);
+
+            //show all attendances for one student 
+            Route::get( 'attendances',[App\Http\Controllers\User\AttendanceCheckController::class, 'Attendances']);
+    
+            //show type attendances for student 
+            Route::get( 'attendancestype/{type}',[App\Http\Controllers\User\AttendanceCheckController::class, 'AttendancesType']);
+    
+            //show all sent complaints for student
+            Route::get( 'complaints/sent',[App\Http\Controllers\User\ComplaintController::class, 'StudentSentComplaints']);
+   
+            //show all received complaints for student
+            Route::get( 'complaints/received',[App\Http\Controllers\User\ComplaintReceiverController::class, 'StudentReceivedComplaints']);
+    
+            //add student complaint
+            Route::post( 'complaints/add',[App\Http\Controllers\User\ComplaintController::class, 'AddStudentComplaint']);
+    
         });
     
     });
 
 
 
-    //show all group for administrator
-    Route::get( '/groups/groupsforadministrator/{administrator_id}',[App\Http\Controllers\User\GroupController::class, 'groupsforadministrator']);
-    //show all classesfor administrator
-    Route::get( '/classes/classesforadministrator/{administrator_id}',[App\Http\Controllers\User\ClassController::class, 'classesforadministrator']);
-    //show all classes
-    Route::get( '/classes/all',[App\Http\Controllers\User\ClassController::class, 'all']);
-    //show all studends in group
-    Route::get( '/students/groupstudents/{class_id}/{group_id}',[App\Http\Controllers\User\StudentController::class, 'groupstudents']);
-    //show all attendances for one student 
-    Route::get( '/attendances/studentAttendance/{student_id}',[App\Http\Controllers\User\AttendanceCheckController::class, 'studentAttendance']);
-    //show type attendances for student 
-    Route::get( '/attendances/AttendanceType/{student_id}/{type}',[App\Http\Controllers\User\AttendanceCheckController::class, 'AttendanceType']);
-    //show all sent complaints for student
-    Route::get( '/compaints/StudentSentComplaints/{user_id}',[App\Http\Controllers\User\ComplaintController::class, 'StudentSentComplaints']);
-    //show all sent complaints for administrator
-    Route::get( '/compaints/AdministratorSentComplaints/{user_id}',[App\Http\Controllers\User\ComplaintController::class, 'AdministratorSentComplaints']);
-    //show all received complaints for student
-    Route::get( '/compaints/StudentReceivedComplaints/{user_id}',[App\Http\Controllers\User\ComplaintReceiverController::class, 'StudentReceivedComplaints']);
-    //show all received complaints for administrator
-    Route::get( '/compaints/AdministratorReceivedComplaints/{user_id}',[App\Http\Controllers\User\ComplaintReceiverController::class, 'AdministratorReceivedComplaints']);
-    //add administrator complaint
-    Route::post( '/compaints/AddAdministratorComplaint',[App\Http\Controllers\User\ComplaintController::class, 'AddAdministratorComplaint']);
-    //add student complaint
-    Route::post( '/compaints/AddStudentComplaint',[App\Http\Controllers\User\ComplaintController::class, 'AddStudentComplaint']);
     //add student
     Route::post( '/student/add',[App\Http\Controllers\User\StudentController::class, 'add']);
     //add class

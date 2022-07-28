@@ -40,7 +40,16 @@ class EventController extends Controller
    */
   public function store(Request $request)
   {
-    
+
+    $event = Event::create([
+      'date'=> $request->date,
+      'title'=> $request->title,
+      'description'=> $request->description,
+  ]);
+
+    $event -> schoolClasses() -> syncWithoutDetaching($request->class_ids);
+
+    return $this->returnSuccessMessage('Event Add Successfully');
   }
 
   /**

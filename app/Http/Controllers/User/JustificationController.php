@@ -39,8 +39,8 @@ class JustificationController extends Controller
    */
   public function store(Request $request, $attendance_check_id)
   {
-     //save pdf in folder.
-    $file_name = $this -> saveFile($request -> file , 'educationalContent/files');
+    //save file in folder.
+    $file_name = $this -> saveFile($request -> file , 'justification');
 
     $justification = Justification::create([
          'text'=> $request->text,
@@ -49,7 +49,6 @@ class JustificationController extends Controller
      ]);
 
       return $this->returnSuccessMessage('Justification Add Successfully');
-    
   }
 
   /**

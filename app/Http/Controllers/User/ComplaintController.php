@@ -75,8 +75,6 @@ class ComplaintController extends Controller
     return $this->returnSuccessMessage('Complaint Add Successfully');
      
   }
-
-
 }
 
 ?>

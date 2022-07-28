@@ -55,6 +55,18 @@ use Illuminate\Support\Facades\Route;
 
             //show all events for administrator's classes
             Route::get( 'events/all',[App\Http\Controllers\User\EventController::class, 'admineEvents']);
+
+            //add attendance for student
+            Route::post( 'attendance/add',[App\Http\Controllers\User\AttendanceCheckController::class, 'store']);
+
+            //add event for class
+            Route::post( 'event/add',[App\Http\Controllers\User\EventController::class, 'store']);
+
+            //add schedule for group
+            Route::post( 'schedule/add',[App\Http\Controllers\User\ScheduleController::class, 'store']);
+
+            //add educational content for class
+            Route::post( 'educational-content/add',[App\Http\Controllers\User\EducationalContentController::class, 'store']);
  
          });
     });

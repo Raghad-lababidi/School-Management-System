@@ -44,6 +44,17 @@ class AttendanceCheckController extends Controller
     return $this->returnData('Attendance',$attendances); 
   }
 
+  public function store(Request $request)
+  {
+    $attendanceCheck = AttendanceCheck::create([
+      'date' => $request->date,
+      'type' => $request->type,
+      'student_id' => $request->student_id,
+    ]);
+
+    return $this->returnSuccessMessage('Attendance Check Add Successfully');
+  }
+
 }
 
 ?>

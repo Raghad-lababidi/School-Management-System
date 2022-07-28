@@ -6,12 +6,14 @@ use App\Models\EducationalContent;
 use Illuminate\Http\Request;
 
 use App\Traits\GeneralTrait;
+use App\Traits\FileTrait;
 
 
 class EducationalContentController extends Controller
 {
-
     use GeneralTrait;
+    use FileTrait;
+
   /**
    * Display a listing of the resource.
    *
@@ -39,6 +41,17 @@ class EducationalContentController extends Controller
    */
   public function store(Request $request)
   {
+    //save file in folder.
+    $file_name = $this -> saveFile($request -> file , 'educational content');
+
+    $schedules = EducationalContent::create([
+         'title'=> $request->title,
+         'semester'=> $request->semester,
+         'file'=> $file_name,
+         'class_subject_id'=> $request->class_subject_id,
+     ]);
+
+    return $this->returnSuccessMessage('Content Add Successfully');
 
   }
 

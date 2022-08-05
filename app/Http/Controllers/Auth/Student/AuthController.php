@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth\Student;
 use App\Http\Controllers\Controller;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,34 +29,40 @@ class AuthController extends Controller
 
             $credentials = $request->only(['user_name', 'password']);
 
-            $token = Auth::guard('student-api')->attempt($credentials);  
+            if(Auth::guard('student-api')->attempt($credentials)){
 
-            if (!$token)
-                return $this->returnError('E001', 'The login information is incorrect');
+                $student = Auth::guard('student-api')->user();
+               
+                $token = $student->createToken('MyApp', ['student-api'])->plainTextToken;
 
-            $student = Auth::guard('student-api')->user()->select('user_name');
-            $student->api_token = $token;
+                if (!$token)
+                    return $this->returnError('E001', 'The login information is incorrect');
 
-            return $this->returnData('student', $student);  
+                $student->api_token = $token;
 
+                return $this->returnData('student', $student);
+            }
         } catch (\Exception $ex) {
             return $this->returnError($ex->getCode(), $ex->getMessage());
         }
+      
     }
 
     public function logout(Request $request)
     {
-        $token = $request->header('auth-token');
-        if ($token) {
-            try {
+        auth()->user()->tokens()->delete();
+        return $this->returnSuccessMessage('Logged out successfully');
+        // $token = $request->header('auth-token');
+        // if ($token) {
+        //     try {
 
-                JWTAuth::setToken($token)->invalidate(); 
-            } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-                return  $this->returnError('', 'some thing went wrongs');
-            }
-            return $this->returnSuccessMessage('Logged out successfully');
-        } else {
-            $this->returnError('', 'some thing went wrongs');
-        }
+        //         JWTAuth::setToken($token)->invalidate(); 
+        //     } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+        //         return  $this->returnError('', 'some thing went wrongs');
+        //     }
+        //     return $this->returnSuccessMessage('Logged out successfully');
+        // } else {
+        //     $this->returnError('', 'some thing went wrongs');
+        // }
     }
 }

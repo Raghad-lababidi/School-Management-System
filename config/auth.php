@@ -42,18 +42,18 @@ return [
         ],
 
         'api' => [
-            'driver' => 'jwt',
+            'driver' => 'session',
             'provider' => 'users',
 //            'hash' => false,
         ],
 
         'student-api' => [
-            'driver' => 'jwt',
+            'driver' => 'session',
             'provider' => 'students',
         ],
 
         'administrator-api' => [
-            'driver' => 'jwt',
+            'driver' => 'session',
             'provider' => 'administrators',
         ]
 

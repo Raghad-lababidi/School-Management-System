@@ -2,11 +2,15 @@
 
 namespace App\Exceptions;
 
+use App\Traits\GeneralTrait;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Support\Facades\Auth;
 
 class Handler extends ExceptionHandler
 {
+    use GeneralTrait;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -38,4 +42,16 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof \Laravel\Sanctum\Exceptions\MissingAbilityException)
+            return $this->returnError('403', 'Sorry You Are Forbidden');
+
+        if (!Auth::check())
+            return $this->returnError('401', 'Unauthenticated');
+        
+        return $this->returnError('E000', 'some thing went wrongs');
+    }
+    
 }

@@ -12,7 +12,7 @@ class Mark extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'type', 'semester', 'subject_id', 'student_id'
+        'type', 'semester', 'value' ,'subject_id', 'student_id'
     ];
 
     protected $hidden = [

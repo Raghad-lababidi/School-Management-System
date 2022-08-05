@@ -7,6 +7,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Administrator extends Authenticatable  implements JWTSubject
 {
+    protected $guard = 'administrator-api';
 
     protected $table = 'administrators';
 

@@ -8,11 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
-
-
 class AuthController extends Controller
 {
-
     use GeneralTrait;
 
     public function login(Request $request)
@@ -37,7 +34,7 @@ class AuthController extends Controller
             if (!$token)
                 return $this->returnError('E001', 'The login information is incorrect');
 
-            $administrator = Auth::guard('administrator-api')->user();
+            $administrator = Auth::guard('administrator-api')->user()->select('user_name');
             $administrator->api_token = $token;
 
             return $this->returnData('administrator', $administrator);

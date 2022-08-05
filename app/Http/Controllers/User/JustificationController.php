@@ -108,6 +108,7 @@ class JustificationController extends Controller
 
   public function showJustification($attendance_check_id)
   {
+    echo "heeeereeeee";
     $justification = Justification::join('attendance_checks','justifications.attendance_check_id','=','attendance_checks.id')->where('attendance_checks.id', $attendance_check_id)->select('text', 'file')->get();
    
     if(!$justification)

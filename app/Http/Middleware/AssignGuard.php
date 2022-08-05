@@ -22,18 +22,24 @@ class AssignGuard extends BaseMiddleware
     {
         if($guard != null){
             auth()->shouldUse($guard);
+           // echo  auth()->getDefaultDriver();
             $token = $request->header('auth-token');
             $request->headers->set('auth-token', (string) $token, true);
             $request->headers->set('Authorization', 'Bearer '.$token, true);
+            
             try {
+              // echo  $user = auth()->authenticate($request);
                 $user = JWTAuth::parseToken()->authenticate();
-            } catch (TokenExpiredException $e) {
+            }catch (TokenExpiredException $e) {
                 return  $this -> returnError('401','Unauthenticated user');
             } catch (JWTException $e) {
 
-                return  $this -> returnError('', 'token_invalid'.$e->getMessage());
+                return  $this -> returnError('', 'token_invalid: '.$e->getMessage());
             }
         }
+      //  if($user)
          return $next($request);
+        
+       // return  $this -> returnError('403', 'You are unauthorized to access this resource');
     }
 }

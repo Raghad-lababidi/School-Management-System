@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
 class Student extends Authenticatable  implements JWTSubject
 {
+    protected $guard = 'student-api';
 
     protected $table = 'students';
 

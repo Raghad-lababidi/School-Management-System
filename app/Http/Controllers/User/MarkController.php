@@ -5,6 +5,9 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Traits\GeneralTrait;
 use App\Models\Mark;
+use App\Models\ClassGroup;
+use App\Imports\MarksImport;
+use Excel;
 
 class MarkController extends Controller 
 {
@@ -38,7 +41,16 @@ class MarkController extends Controller
    */
   public function store(Request $request)
   {
-    
+    $class_group= ClassGroup::where('school_class_id',$request->class_id)
+    ->where('group_id',$request->group_id)->first();
+
+    $class_group_id= $class_group->id;
+
+    $import=new MarksImport($class_group_id,$request->subject_id,$request->type,$request->semester);
+    Excel::import($import, $request->file);
+
+    return $this->returnSuccessMessage('Marks Add Successfully');
+
   }
 
   /**

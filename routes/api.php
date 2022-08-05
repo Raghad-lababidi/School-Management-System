@@ -69,6 +69,9 @@ use Illuminate\Support\Facades\Route;
             //add educational content for class
             Route::post( 'educational-content/add',[App\Http\Controllers\User\EducationalContentController::class, 'store']);
  
+            // add marks
+            Route::post( 'mark/add',[App\Http\Controllers\User\MarkController::class, 'store']);
+
          });
     });
 
@@ -126,7 +129,8 @@ use Illuminate\Support\Facades\Route;
     
     });
 
-
+    // add marks
+    Route::post( '/administrator/mark/add',[App\Http\Controllers\User\MarkController::class, 'store']);
 
     //add student
     Route::post( '/student/add',[App\Http\Controllers\User\StudentController::class, 'add']);

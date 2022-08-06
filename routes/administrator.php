@@ -24,8 +24,8 @@ use Illuminate\Support\Facades\Route;
              //logout administrator
              Route::post('logout',[App\Http\Controllers\Auth\Administrator\AuthController::class, 'logout']);
  
-             //show all groups for administrator
-             Route::get( 'groups',[App\Http\Controllers\User\GroupController::class, 'groupsforadministrator']);
+             //show all groups for class
+             Route::get( 'groups/{class_id}',[App\Http\Controllers\User\GroupController::class, 'groupsforadministrator']);
     
              //show all classesfor administrator
              Route::get( 'classes',[App\Http\Controllers\User\ClassController::class, 'classesforadministrator']);

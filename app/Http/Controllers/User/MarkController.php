@@ -8,7 +8,7 @@ use App\Models\Mark;
 use App\Models\ClassGroup;
 use App\Imports\MarksImport;
 use Excel;
-
+use DB;
 class MarkController extends Controller 
 {
 
@@ -114,13 +114,13 @@ class MarkController extends Controller
   {
     $marks = Mark::join('subjects', 'subjects.id', '=', 'marks.subject_id')
     ->where('marks.semester', $semester_id)->where('marks.student_id', $student_id)
-    ->select('marks.type', 'marks.value', 'subjects.name')->get();
+    ->select('marks.type', 'marks.value', 'subjects.name as subject_name')->get()->groupBy(['subject_name', 'type']);
+
     if(!$marks)
       return $this->returnError('E000', 'No Marks Found');
 
     return $this->returnData('marks', $marks);
   }
-  
 }
 
 ?>

@@ -55,7 +55,7 @@ use Illuminate\Support\Facades\Route;
             Route::get( 'attendances',[App\Http\Controllers\User\AttendanceCheckController::class, 'Attendances']);
     
             //show type attendances for student 
-            Route::get( 'attendancestype/{type}',[App\Http\Controllers\User\AttendanceCheckController::class, 'AttendancesType']);
+            Route::get( '/attendancestype/{type}',[App\Http\Controllers\User\AttendanceCheckController::class, 'AttendancesType']);
     
             //show all sent complaints for student
             Route::get( 'complaints/sent',[App\Http\Controllers\User\ComplaintController::class, 'StudentSentComplaints']);

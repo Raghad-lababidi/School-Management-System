@@ -29,7 +29,8 @@ class AuthController extends Controller
 
             $credentials = $request->only(['user_name', 'password']);
 
-            if(Auth::guard('student-api')->attempt($credentials)){
+            if(Auth::guard('student-api')->attempt($credentials))
+            {
 
                 $student = Auth::guard('student-api')->user();
                
@@ -45,6 +46,8 @@ class AuthController extends Controller
         } catch (\Exception $ex) {
             return $this->returnError($ex->getCode(), $ex->getMessage());
         }
+
+        return $this->returnError('E001', 'The login information is incorrect');
       
     }
 

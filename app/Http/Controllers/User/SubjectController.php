@@ -88,7 +88,7 @@ class SubjectController extends Controller
   {
     $class_id = auth()->user()->classGroup->school_class_id;
 
-    $subjects = Subject::join('class_subject', 'class_subject.subject_id', '=', 'subjects.id')->where('class_subject.school_class_id', $class_id)->select('name')->get();
+    $subjects = Subject::join('class_subject', 'class_subject.subject_id', '=', 'subjects.id')->where('class_subject.school_class_id', $class_id)->select('subjects.id','name')->get();
 
     if(!$subjects)
       return $this->returnError('E000', 'No Subjects Found');

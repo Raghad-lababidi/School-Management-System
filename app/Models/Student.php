@@ -19,6 +19,10 @@ class Student extends Authenticatable
         'father_name', 'mother_name', 'phone', 'user_name', 'user_id', 'class_group_id'
     ];
 
+    protected $hidden = [
+        'password', 'created_at', 'updated_at'
+    ];
+
     ##############################Relationships##############################
     
     public function user()

@@ -19,6 +19,10 @@ class Complaint extends Model
         'created_at', 'updated_at'
     ];
 
+    // protected $casts = [
+    //     'text' => 'encrypted'
+    // ];
+
     ##############################Relationships##############################
 
     public function receiver()

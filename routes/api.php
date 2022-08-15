@@ -20,11 +20,20 @@ Route::post( '/student/add',[App\Http\Controllers\User\StudentController::class,
 Route::post( '/class/add',[App\Http\Controllers\User\ClassController::class, 'add']);
 
 
-Route::get('/test-online',function(){dd('i am online ^-^');});
+// Route::get('/test-online',function(){dd('i am online ^-^');});
 
 
 
+Route::group(['prefix' => 'admin'],function (){
 
+    //بدون صلاحيات
+
+    Route::group(['middleware' => ['auth:sanctum', 'abilities:admin-api']], function () {
+       
+        Route::get('/',function(){dd('Hello Iam Admin ^-^');});
+        //من صلاحيات المدير
+    });
+});
 
 
 

@@ -40,11 +40,11 @@ class JustificationController extends Controller
   public function store(Request $request, $attendance_check_id)
   {
     //save file in folder.
-    $file_name = $this -> saveFile($request -> file , 'justification');
+    $file = $this -> saveFile($request -> file , 'justification');
 
     $justification = Justification::create([
          'text'=> $request->text,
-         'file'=> $file_name,
+         'file'=> $file,
          'attendance_check_id'=> $attendance_check_id,
      ]);
 

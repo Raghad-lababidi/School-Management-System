@@ -39,7 +39,11 @@ class AuthController extends Controller
                 if (!$token)
                     return $this->returnError('E001', 'The login information is incorrect');
 
-                $student->api_token = $token;
+                // $student->api_token = $token;
+
+                Auth::guard('student-api')->user()->update(['fcm_token'=>$token]);
+                
+                // auth()->user()->update(['fcm_token'=>$token]);
 
                 return $this->returnData('student', $student);
             }

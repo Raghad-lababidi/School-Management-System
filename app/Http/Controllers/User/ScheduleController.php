@@ -40,12 +40,12 @@ class ScheduleController extends Controller
   public function store(Request $request)
   {
     //save file in folder.
-    $file_name = $this -> saveFile($request -> file , 'schedules');
+    $file = $this -> saveFile($request -> file , 'schedules');
 
     $schedules = Schedule::create([
          'type'=> $request->type,
          'semester'=> $request->semester,
-         'file'=> $file_name,
+         'file'=> $file,
          'class_group_id'=> $request->class_group_id,
      ]);
 

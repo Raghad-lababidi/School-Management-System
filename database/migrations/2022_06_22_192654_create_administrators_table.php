@@ -15,6 +15,7 @@ class CreateAdministratorsTable extends Migration {
 			$table->string('user_name')->unique();
             $table->string('password');
 			$table->unsignedBigInteger('user_id');
+			$table->text('fcm_token')->nullable();
 			$table->timestamps();
         });
 	}

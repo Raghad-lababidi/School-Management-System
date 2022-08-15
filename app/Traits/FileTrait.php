@@ -13,7 +13,9 @@ Trait FileTrait
         $new_file_name = $file_name. time().'.'.$file_extension;
         $path = $folder;
         $file  -> move($path, $new_file_name);
-        return $file_name;
+
+        $filePath = $folder.'/'. $file_name;
+        return $filePath;
     }
 
     public function deleteFile($file , $folder)

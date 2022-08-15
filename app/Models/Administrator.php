@@ -16,7 +16,8 @@ class Administrator extends Authenticatable
     public $timestamps = true;
 
     protected $fillable = [
-        'user_name', 'age', 'certification', 'user_id'
+        'user_name', 'age', 'certification', 'user_id', 'fcm_token'
+
     ];
 
     protected $hidden = [

@@ -42,12 +42,12 @@ class EducationalContentController extends Controller
   public function store(Request $request)
   {
     //save file in folder.
-    $file_name = $this -> saveFile($request -> file , 'educational content');
+    $file = $this -> saveFile($request -> file , 'educational content');
 
     $schedules = EducationalContent::create([
          'title'=> $request->title,
          'semester'=> $request->semester,
-         'file'=> $file_name,
+         'file'=> $file,
          'class_subject_id'=> $request->class_subject_id,
      ]);
 

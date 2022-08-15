@@ -43,15 +43,15 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function render($request, Throwable $exception)
-    {
-        if ($exception instanceof \Laravel\Sanctum\Exceptions\MissingAbilityException)
-            return $this->returnError('403', 'Sorry You Are Forbidden');
+    // public function render($request, Throwable $exception)
+    // {
+    //     if ($exception instanceof \Laravel\Sanctum\Exceptions\MissingAbilityException)
+    //         return $this->returnError('403', 'Sorry You Are Forbidden');
 
-        if (!Auth::check())
-            return $this->returnError('401', 'Unauthenticated');
+    //     if (!Auth::check())
+    //         return $this->returnError('401', 'Unauthenticated');
         
-        return $this->returnError('E000', 'some thing went wrongs');
-    }
+    //     return $this->returnError('E000', 'some thing went wrongs');
+    // }
     
 }

@@ -17,6 +17,7 @@ class CreateStudentsTable extends Migration {
             $table->string('password');
 			$table->unsignedBigInteger('user_id');
 			$table->unsignedBigInteger('class_group_id');
+			$table->text('fcm_token')->nullable();
 			$table->timestamps();
 		});
 	}

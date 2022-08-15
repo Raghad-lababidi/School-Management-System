@@ -96,16 +96,32 @@ class ScheduleController extends Controller
     
   }
 
-  public function all($semester_id)
+  public function allExamScheduales($semester_id)
   {
     $student_class_group_id = auth()->user()->class_group_id;
 
-    $scheduales = Schedule::where('class_group_id', $student_class_group_id)->where('semester', $semester_id)->select('type', 'file')->get();
+    $scheduales = Schedule::where('class_group_id', $student_class_group_id)
+    ->where('semester', $semester_id)
+    ->where('type', 1)->select('type', 'file')->get();
 
     if(!$scheduales)
       return $this->returnError('E000', 'No Scheduals Found');
 
-    return $this->returnData('Scheduals', $scheduales); 
+    return $this->returnData('Exam-Scheduales', $scheduales); 
+  }
+
+  public function allWorkScheduales($semester_id)
+  {
+    $student_class_group_id = auth()->user()->class_group_id;
+
+    $scheduales = Schedule::where('class_group_id', $student_class_group_id)
+    ->where('semester', $semester_id)
+    ->where('type', 2)->select('type', 'file')->get();
+
+    if(!$scheduales)
+      return $this->returnError('E000', 'No Scheduals Found');
+
+    return $this->returnData('Work-Scheduales', $scheduales); 
   }
 
   public function admineSchedules($semester_id)

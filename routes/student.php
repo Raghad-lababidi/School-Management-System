@@ -39,8 +39,11 @@ use Illuminate\Support\Facades\Route;
             //show justification of specific attendance
             Route::get('justifications/{attendance_check_id}', [App\Http\Controllers\User\JustificationController::class, 'showJustification']);
 
-            //show all scheduales
-            Route::get('scheduales/all/{semester_id}', [App\Http\Controllers\User\ScheduleController::class, 'all']);
+            //show all Exam schedules
+            Route::get('exam-scheduales/all/{semester_id}', [App\Http\Controllers\User\ScheduleController::class, 'allExamScheduales']);
+
+            //show all work schedules
+            Route::get('work-scheduales/all/{semester_id}', [App\Http\Controllers\User\ScheduleController::class, 'allWorkScheduales']);
     
             //show all subjects
             Route::get('subjects/all', [App\Http\Controllers\User\SubjectController::class, 'all']);

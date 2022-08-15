@@ -16,3 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::group(['prefix' => 'admin'],function (){
+
+    //بدون صلاحيات
+    //login student
+    Route::post('login', [App\Http\Controllers\Auth\Admin\AuthController::class, 'login']);
+
+    Route::group(['middleware' => ['auth:sanctum', 'abilities:admin-api']], function () {
+       
+        //من صلاحيات المدير
+        Route::get('/',function(){dd('Hello Iam Admin ^-^');});
+
+        //logout student
+        Route::post('logout', [App\Http\Controllers\Auth\Admin\AuthController::class, 'logout']);
+    });
+});
+

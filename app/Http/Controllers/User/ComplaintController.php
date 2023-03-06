@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Traits\GeneralTrait;
 use App\Models\Complaint;
 use App\Models\ComplaintReceiver;
+use App\Models\Administrator;
 
 class ComplaintController extends Controller 
 {
@@ -67,7 +68,9 @@ class ComplaintController extends Controller
       'sender_id' => $sender_id,
     ]);
  
-    $receiver_id = auth()->user()->classGroup->administrator_id;
+    $administrator_id= auth()->user()->classGroup->administrator_id;
+
+    $receiver_id = Administrator::where('id', $administrator_id)->pluck('user_id')[0];
    
     $receive = ComplaintReceiver::create([
       'complaint_id' => $compaint->id,

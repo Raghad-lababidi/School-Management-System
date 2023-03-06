@@ -7,10 +7,13 @@ use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Providers\RouteServiceProvider;
+use Session;
 
 class AuthController extends Controller
 {
     use GeneralTrait;
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     public function login(Request $request)
     {
@@ -40,8 +43,12 @@ class AuthController extends Controller
                     return $this->returnError('E001', 'The login information is incorrect');
 
                 $student->api_token = $token;
+                
+               //return $this->returnData('admin', $student);
+               $request->session()->put('token',$token);
+               
+               return redirect('admin/dashboard');
 
-                return $this->returnData('admin', $student);
             }
         } catch (\Exception $ex) {
             return $this->returnError($ex->getCode(), $ex->getMessage());
@@ -49,6 +56,10 @@ class AuthController extends Controller
 
         return $this->returnError('E001', 'The login information is incorrect');
       
+    }
+    public function dashboard(){
+        
+        return view('dashboard');
     }
 
     public function logout(Request $request)
